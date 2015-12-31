@@ -3,6 +3,7 @@
  */
 
 #include <pebble.h>
+#include "bookmarkswindow.h"
 
 //#define KEY_COUNT 5
 #define NUM_FIRST_MENU_ITEMS 2
@@ -59,22 +60,14 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 }
 
 static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
-    Window *newWindow = NULL;
     switch (cell_index->row) {
         case 0:
             APP_LOG(APP_LOG_LEVEL_ERROR, "Select bookmarks");
-            newWindow = window_create()
+            showBookmarks();
             break;
         default:
-            newWindow = window_create()
             break;
-    }
-    
-    window_set_window_handlers(newWindow, (WindowHandlers) {
-        .load = NULL,
-        .unload = NULL,
-    });
-    window_stack_push(newWindow, true);
+    }    
 }
 
 //static void sync_changed_handler(const uint32_t key, const Tuple *new_tuple, const Tuple *old_tuple, void *context) {
