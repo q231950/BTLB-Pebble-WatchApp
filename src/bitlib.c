@@ -5,15 +5,10 @@
 #include <pebble.h>
 #include "bookmarkswindow.h"
 
-//#define KEY_COUNT 5
 #define NUM_FIRST_MENU_ITEMS 2
 
 static Window *s_main_window;;
 static MenuLayer *s_menu_layer;
-
-//static AppSync s_sync;
-//static uint8_t s_sync_buffer[32];
-//static char ** bookmarks = NULL;
 
 static uint16_t menu_get_num_sections_callback(MenuLayer *menu_layer, void *data) {
     return 1;
@@ -62,24 +57,13 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
     switch (cell_index->row) {
         case 0:
-            APP_LOG(APP_LOG_LEVEL_ERROR, "Select bookmarks");
+            APP_LOG(APP_LOG_LEVEL_ERROR, "Sele ct bookmarks");
             showBookmarks();
             break;
         default:
             break;
     }    
 }
-
-//static void sync_changed_handler(const uint32_t key, const Tuple *new_tuple, const Tuple *old_tuple, void *context) {
-//    static char s_bookmarks_buffer[32];
-//    snprintf(s_bookmarks_buffer, sizeof(s_bookmarks_buffer), "Count: %d", (int)new_tuple->value->int32);
-//    //    text_layer_set_text(s_output_layer, s_bookmarks_buffer);
-//}
-//
-//static void sync_error_handler(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
-//    // An error occured!
-//    APP_LOG(APP_LOG_LEVEL_ERROR, "sync error!");
-//}
 
 // Window
 
@@ -116,25 +100,11 @@ static void init(void) {
         .unload = main_window_unload,
     });
     window_stack_push(s_main_window, true);
-    
-//     Setup AppSync
-//    app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
-    
-    // Setup initial values
-//    Tuplet initial_values[] = {
-//        TupletInteger(KEY_COUNT, 0),
-//    };
-    
-    // Begin using AppSync
-//    app_sync_init(&s_sync, s_sync_buffer, sizeof(s_sync_buffer), initial_values, ARRAY_LENGTH(initial_values), sync_changed_handler, sync_error_handler, NULL);
 }
 
 static void deinit(void) {
     // Destroy main Window
     window_destroy(s_main_window);
-    
-    // Finish using AppSync
-//    app_sync_deinit(&s_sync);
 }
 
 int main(void) {
