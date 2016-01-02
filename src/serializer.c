@@ -11,28 +11,26 @@
 #include <stdlib.h>
 
 char** arrayFromString(char * aString) {
-    char ** res  = NULL;
-    char *  p    = strtok (aString, "|");
-    int n_spaces = 0;
+    char* new_str = malloc(strlen(aString));
+    strcpy(new_str, aString);
     
-    /* split string and append tokens to 'res' */
+    APP_LOG(APP_LOG_LEVEL_DEBUG, new_str);
+    
+    char ** res  = NULL;
+    char * p = strtok (new_str, "|");
+    int n_spaces = 0;
     
     while (p) {
         res = realloc (res, sizeof(char*) * ++n_spaces);
 
         if (res == NULL)
             APP_LOG(APP_LOG_LEVEL_DEBUG, "memory allocation failed");
-            
         
         res[n_spaces-1] = p;
         
         p = strtok (NULL, "|");
     }
-
-    /* realloc one extra element for the last NULL */
     
-    res = realloc (res, sizeof (char*) * (n_spaces+1));
-    res[n_spaces] = 0;
-    
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "sizeof(res) %d", sizeof(res));
     return res;
 }
