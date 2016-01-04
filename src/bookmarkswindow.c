@@ -59,12 +59,13 @@ void synchroniseWithChecksum(char *checksum) {
 void readSerialisedBookmarksList(char *serialisedList) {
     APP_LOG(APP_LOG_LEVEL_DEBUG, "readSerialisedBookmarksList %s", serialisedList);
     
-    int numItems = (int)bookmarksCount;
-    bookmarks = arrayFromString(serialisedList, &bookmarksCount);
-    numItems = (int)bookmarksCount;
-    
-    for (int i = 0; i < numItems; ++i) {
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "res[] = %s\n", bookmarks[i]);
+    if (!serialisedList || strlen(serialisedList) == 0) {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "resetting to 0 elements");
+        bookmarks = NULL;
+        bookmarksCount = 0;
+    } else {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "reading items");
+        bookmarks = arrayFromString(serialisedList, &bookmarksCount);
     }
     
     menu_layer_reload_data(s_menu_layer);
