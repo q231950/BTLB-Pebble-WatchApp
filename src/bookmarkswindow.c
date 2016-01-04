@@ -8,7 +8,7 @@
 
 static Window *window;
 static AppSync s_sync;
-static uint8_t s_sync_buffer[32];
+static uint8_t s_sync_buffer[1024];
 static MenuLayer *s_menu_layer;
 char ** bookmarks = NULL;
 int bookmarksCount = 0;
