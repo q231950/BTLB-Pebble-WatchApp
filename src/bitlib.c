@@ -57,7 +57,7 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
     switch (cell_index->row) {
         case 0:
-            APP_LOG(APP_LOG_LEVEL_ERROR, "Sele ct bookmarks");
+            APP_LOG(APP_LOG_LEVEL_ERROR, "Select bookmarks");
             showBookmarks();
             break;
         default:

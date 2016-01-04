@@ -9,6 +9,6 @@
 #ifndef serializer_h
 #define serializer_h
 
-char** arrayFromString(char * aString);
+char** arrayFromString(char * aString, int *count);
 
 #endif /* serializer_h */

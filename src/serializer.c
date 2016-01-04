@@ -10,7 +10,7 @@
 #include <Pebble.h>
 #include <stdlib.h>
 
-char** arrayFromString(char * aString) {
+char** arrayFromString(char * aString, int * count) {
     char* new_str = malloc(strlen(aString));
     strcpy(new_str, aString);
     
@@ -31,6 +31,7 @@ char** arrayFromString(char * aString) {
         p = strtok (NULL, "|");
     }
     
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "sizeof(res) %d", sizeof(res));
+    *count = n_spaces;
+    
     return res;
 }
